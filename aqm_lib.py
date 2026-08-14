@@ -8,7 +8,7 @@ be pickled back into a fresh worker interpreter.
 """
 
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Tuple
 
 import pandas as pd
@@ -27,13 +27,6 @@ def init_worker(data_path: str) -> None:
     global _D5, _D6
     _D5 = pd.read_excel(data_path, sheet_name="StockPrice", index_col=0)
     _D6 = pd.read_excel(data_path, sheet_name="MacroIndicators", index_col=0)
-
-
-def load_data(data_path: str):
-    """Load the input data in the main process (same data, same call shape)."""
-    d5 = pd.read_excel(data_path, sheet_name="StockPrice", index_col=0)
-    d6 = pd.read_excel(data_path, sheet_name="MacroIndicators", index_col=0)
-    return d5, d6
 
 
 class RegressionDiagnostics:
