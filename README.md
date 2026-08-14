@@ -34,6 +34,8 @@ existing analysis portable and runnable outside of Google Colab.
 
 ```
 AQM_Diagnostics.ipynb   the analysis notebook
+aqm_lib.py               shared regression/diagnostics code (RegressionDiagnostics,
+                          the parallel-fit worker) used by the notebook
 data/
   AQM_1.xlsx             StockPrice + MacroIndicators sheets (source data)
   AQM_VIF.xlsx           original precomputed VIF output, kept for reference
@@ -54,11 +56,13 @@ jupyter notebook AQM_Diagnostics.ipynb
 ```
 
 The notebook reads directly from `data/AQM_1.xlsx`; no external API, Google Drive,
-or Colab environment is required. A full run of the 7-variable loop produces
-~1,200 regressions and their associated plots (120 combinations × 10 companies) —
-that takes a while and writes a lot of files to `output/`. To just see the results,
-reading through the notebook's own printed output and existing cell structure is
-enough; you don't need to run it end-to-end.
+or Colab environment is required. The 7-variable loop's 1,200 regressions (120
+combinations × 10 companies) run in parallel across worker processes (via
+`aqm_lib.py`, using `concurrent.futures.ProcessPoolExecutor`), which keeps a full
+run to a few minutes on a modern multi-core machine rather than the much longer
+sequential runtime a naive loop would take. To just see the results, reading
+through the notebook's own printed output and existing cell structure is enough;
+you don't need to run it end-to-end.
 
 ## Note on the data
 
