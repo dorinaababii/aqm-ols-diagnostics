@@ -3,6 +3,11 @@
 Testing for heteroskedasticity, multicollinearity, and serial autocorrelation in
 OLS regressions of EU stock returns on EU macroeconomic indicators.
 
+This is Dorina Ababii's own original coursework code from 2021, published here with
+only slight modifications — mainly portability fixes so it runs outside Google Colab.
+The analysis, the methodology, and the results are unchanged from the original
+submission.
+
 ## Context
 
 This is a coursework project for **Applied Quantitative Methods**, Zurich University
